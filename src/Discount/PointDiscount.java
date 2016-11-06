@@ -3,8 +3,8 @@ package Discount;
 /**
  * Created by immoskyl on 31/10/16.
  */
-public interface PointDiscount extends Discount {
+public class PointDiscount {
 
-    public double calculateDiscount(int points);
+    //public double calculateDiscount() {}
 
 }

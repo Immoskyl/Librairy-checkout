@@ -3,10 +3,7 @@ package Discount;
 /**
  * Created by immoskyl on 31/10/16.
  */
-public abstract class ProductDiscount extends Discount {
+public interface ProductDiscount {
 
-    private int priority;
-
-
-    public abstract double calculateDiscount(double price);
+    //public double calculateDiscount() {}
 }

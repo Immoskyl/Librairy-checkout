@@ -73,18 +73,21 @@ public class DAO {
         query += table;
         if (!rowCondition.isEmpty() && rowCondition.size() == argCondition.size()) {
             query += " WHERE ";
-            for (int i = 0; i !=rowCondition.size() && rowCondition.size() == argCondition.size()) {
-                query += rowCondition.get(i);
-                query += " = ";
-                query += argCondition.get(i);
-                query += (i == rowCondition.size()-1) ? ";" :" AND ";
+            for (int i = 0; i !=rowCondition.size();) {
+                if (rowCondition.size() == argCondition.size()) {
+                    query += rowCondition.get(i);
+                    query += " = ";
+                    query += argCondition.get(i);
+                    query += (i == rowCondition.size() - 1) ? ";" : " AND ";
+                }
             }
         }
+        return query;
     }
 
 
-    private String intertionQueryBuilder (String table, List<String> rowList) {
-        String query = "INSERT INTO ";
+    private String intertionDelationQueryBuilder(String table, List<String> rowList, boolean isInsertionQuery) {
+        String query = isInsertionQuery ?  "INSERT INTO " : "REMOVE FROM ";
         query += table;
         query += " (";
         for (int i = 0; i != rowList.size(); ++i) {
@@ -115,7 +118,6 @@ public class DAO {
                 list.add(result.getString(0));
             }
             //listDriver()
-            return list;
         }
         catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -137,13 +139,14 @@ public class DAO {
                 e.printStackTrace();
             }
         }
+        return list;
     }
 
-    private void insertionQuery (String table, List<String> rowList, List<String> argList) {
+    private void insertionDelationQuery(String table, List<String> rowList, List<String> argList, boolean isAnInsertionQuery) {
         PreparedStatement stmt = null;
         Connection connection = this.setConnection();
         try {
-            stmt = connection.prepareStatement(intertionQueryBuilder(table, rowList)); //builds the statement
+                stmt = connection.prepareStatement(intertionDelationQueryBuilder(table, rowList, isAnInsertionQuery));
 
             for (int i = 0; i != argList.size(); i++) {
                 stmt.setString(i, argList.get(i));         //builds the prepared query args
@@ -177,6 +180,9 @@ public class DAO {
 
     //------------------------------------------------------------------------------------------------------------------
 
+
+    // USER ------------------------------------
+
     public void createUser (Person person) {
         //no verification if the tuple already exists
         List<String> rowList = new ArrayList<>();
@@ -191,7 +197,63 @@ public class DAO {
         rowList.add("ID");
         argList.add(Integer.toString(person.iD));
 
-        insertionQuery("PERSON", rowList, argList);
+        insertionDelationQuery("PERSON", rowList, argList, true);
     }
 
+    public void deleteUser (Person person) { //todo
+        //no verification if the tuple already exists
+        List<String> rowList = new ArrayList<>();
+        List<String> argList = new ArrayList<>();
+
+        rowList.add("ID");
+        argList.add(Integer.toString(person.iD));
+
+        insertionDelationQuery("PERSON", rowList, argList, false);
+    }
+
+    public List<String> getAllUsers () { //todo
+
+        List<String> rowList = new ArrayList<>();
+        List<String> argList = new ArrayList<>();
+        List<String> argCondition = new ArrayList<>();
+        List<String> rowCondition = new ArrayList<>();
+
+        rowList.add("*");
+
+        return selectionQuery("PERSON", rowList, argList, rowCondition, argCondition);
+    }
+
+    public List<String> getUser (int iD) { //todo
+
+        List<String> rowList = new ArrayList<>();
+        List<String> argList = new ArrayList<>();
+        List<String> argCondition = new ArrayList<>();
+        List<String> rowCondition = new ArrayList<>();
+
+        rowList.add("*");
+        rowCondition.add("ID");
+        argCondition.add(Integer.toString(iD));
+
+        return selectionQuery("PERSON", rowList, argList, rowCondition, argCondition);
+    }
+
+
+    public void updateAllUsers () {
+        //todo
+    }
+
+    public void createProduct (Product product) { //todo
+        //no verification if the tuple already exists
+        List<String> rowList = new ArrayList<>();
+        List<String> argList = new ArrayList<>();
+
+        rowList.add("ID");
+        argList.add(Integer.toString(product.ID));
+        rowList.add("NAME");
+        argList.add(product.name);
+        rowList.add("DESCRIPTION");
+        argList.add(product.description);
+
+        insertionDelationQuery("PRODUCT", rowList, argList, true);
+    }
 }
