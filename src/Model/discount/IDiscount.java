@@ -1,4 +1,4 @@
-package discount;
+package Model.discount;
 
 /**
  * Created by immoskyl on 08/11/16.
