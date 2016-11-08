@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by immoskyl on 20/10/16.
  */
-public class DAO {
+public class DAO implements IDAO{
 
     private final String databaseHost = "mysql-immosite.alwaysdata.net";
     private final String databaseUser = "immosite";
