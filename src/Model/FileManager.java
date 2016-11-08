@@ -31,7 +31,7 @@ public class FileManager {
 		{
 			System.out.println("Couldn't read file History");
 		}
-		return aH;
+		return history;
 	}
 	
 	public ArrayList<newUser> readCustomer(String Filename, ArrayList<GamesList> games)
