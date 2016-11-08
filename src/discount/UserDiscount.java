@@ -1,6 +1,7 @@
 package discount;
 
 import dao.IDAO;
+import dao.User;
 
 import static util.Maths.round;
 

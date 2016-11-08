@@ -1,6 +1,7 @@
 package discount;
 
 import dao.IDAO;
+import dao.Order;
 import dao.Product;
 
 import java.util.HashMap;
@@ -31,13 +32,8 @@ public class OrderDiscount implements IDAO {
 
     public double calculateDiscount() {
         double discount = 0.0;
-        HashMap<Product, Integer> list = order.getList();
-        Iterator it = list.entrySet().iterator();
-        Map.Entry entry;
-        while (it.hasNext()) {
-            entry = (Map.Entry)it.next();
-
-            discount += (double)((Integer) entry.getValue() / itemModulo) * entry.getKey().getPrice();
+        for (Map.Entry<Product, Integer> entry : order.getList().entrySet()) {
+            discount += (double)(entry.getValue()/ itemModulo) * entry.getKey().getPrice();
         }
         return discount;
     }
