@@ -1,11 +1,9 @@
 package discount;
 
-import dao.IDAO;
-import dao.Order;
-import dao.Product;
+import Model.dao.IDAO;
+import Model.dao.Order;
+import Model.dao.Product;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

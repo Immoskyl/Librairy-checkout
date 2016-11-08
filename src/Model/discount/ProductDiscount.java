@@ -1,7 +1,7 @@
 package discount;
 
-import dao.IDAO;
-import dao.Product;
+import Model.dao.IDAO;
+import Model.dao.Product;
 
 import static util.Maths.calcPercentage;
 

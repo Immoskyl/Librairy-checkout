@@ -25,7 +25,7 @@ public class Customer extends newUser implements Observer{
 	@Override
 	public void update(String newDiscount) {
 
-		System.out.println("Email has been sent to " + name + " of change in discount to :" + newDiscount);
+		System.out.println("Email has been sent to " + name + " of change in Model.discount to :" + newDiscount);
 	}
 	
 	public void addWatchGame(GamesList theGame){

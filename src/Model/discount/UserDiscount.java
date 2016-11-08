@@ -1,7 +1,7 @@
 package discount;
 
-import dao.IDAO;
-import dao.User;
+import Model.dao.IDAO;
+import Model.dao.User;
 
 import static util.Maths.round;
 

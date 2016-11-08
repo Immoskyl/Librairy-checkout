@@ -427,7 +427,7 @@ public class GUI {
 				}
 			});
 			
-			JButton adddis = new JButton("Add a new discount");
+			JButton adddis = new JButton("Add a new Model.discount");
 			mainFrame.add(adddis);
 			adddis.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -435,7 +435,7 @@ public class GUI {
 				}
 			});
 			
-			JButton removeDis = new JButton("Remove a discount");
+			JButton removeDis = new JButton("Remove a Model.discount");
 			mainFrame.add(removeDis);
 			removeDis.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -720,7 +720,7 @@ public class GUI {
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mainFrame.setLocationRelativeTo(null);
 			JLabel gameID = new JLabel ("Game ID: ", SwingConstants.RIGHT);
-//			JLabel discount = new JLabel ("Discount: ", SwingConstants.RIGHT);
+//			JLabel Model.discount = new JLabel ("Discount: ", SwingConstants.RIGHT);
 			final JTextField gID = new JTextField();
 //			final JTextField dis = new JTextField();
 			JButton enter = new JButton("Enter");
@@ -749,7 +749,7 @@ public class GUI {
 			mainFrame.setSize(400, 400);
 			mainFrame.add(gameID);
 			mainFrame.add(gID);
-//			mainFrame.add(discount);
+//			mainFrame.add(Model.discount);
 //			mainFrame.add(dis);
 			mainFrame.add(enter);
 			mainFrame.add(cancel);
