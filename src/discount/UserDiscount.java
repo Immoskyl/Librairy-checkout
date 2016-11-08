@@ -2,7 +2,7 @@ package discount;
 
 import dao.IDAO;
 
-import static localmaths.MathsUtil.round;
+import static util.Maths.round;
 
 /**
  * Created by immoskyl on 31/10/16.

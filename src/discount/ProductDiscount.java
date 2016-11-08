@@ -3,7 +3,7 @@ package discount;
 import dao.IDAO;
 import dao.Product;
 
-import static localmaths.MathsUtil.calcPercentage;
+import static util.Maths.calcPercentage;
 
 /**
  * Created by immoskyl on 31/10/16.
