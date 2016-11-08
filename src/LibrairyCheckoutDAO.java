@@ -1,4 +1,4 @@
-import DAO.IDAO;
+import dao.IDAO;
 
 /**
  * Created by immoskyl on 20/10/16.
