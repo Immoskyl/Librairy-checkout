@@ -1,4 +1,4 @@
-package dao;
+package Model.dao;
 
 /**
  * Created by immoskyl on 05/11/16.

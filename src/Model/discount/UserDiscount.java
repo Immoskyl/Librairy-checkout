@@ -1,4 +1,4 @@
-package discount;
+package Model.discount;
 
 import Model.dao.IDAO;
 import Model.dao.User;
