@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public class Customer extends newUser implements Observer{
 
 	private GamesList watchedGame;
-	Customer(){
+	Customer()
+	{
+		
 	}
 	
-	Customer(String name, String address, String email, String userId, String password){
+	Customer(String name, String address, String email, String userId, String password)
+	{
 		setName(name);
 		setAddress(address);
 		setEmail(email);
@@ -16,7 +19,8 @@ public class Customer extends newUser implements Observer{
 		setPassword(password);
 	}
 
-	public ArrayList<Customer> createCustomer(String name ,String address , String email, String userId, String password, ArrayList<Customer> customer){
+	public ArrayList<Customer> createCustomer(String name ,String address , String email, String userId, String password, ArrayList<Customer> customer)
+	{
 		Customer c = new Customer(name.trim() , address.trim() , email.trim() , userId.trim(), password.trim());
 		customer.add(c);
 		return customer;
