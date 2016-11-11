@@ -1,16 +1,22 @@
 package Model.dao;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Driver;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 /**
  * Created by immoskyl on 20/10/16.
  */
 public class DAO implements IDAO{
 
-    private final String databaseHost = "mysql-immosite.alwaysdata.net";
+    private final String databaseHost = "mysql-immosite.alwaysdata.neto";
+    private final String databaseName = "immosite_ul-librairy-checkout";
     private final String databaseUser = "immosite";
     private final String databasePassword = "AEd021096=";
 
@@ -38,13 +44,19 @@ public class DAO implements IDAO{
     private Connection setConnection () {
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+          //Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-             connection =  DriverManager.getConnection(databaseHost,databaseUser,databasePassword);
+             connection =  DriverManager.getConnection(databaseHost + "/" + databaseName,databaseUser,databasePassword);
+          /* connection =  DriverManager.getConnection("jdbc:mysql://"
+                    +databaseHost+
+                    ":3306/"+databaseName
+                    + "",""+databaseUser+"",""+databasePassword+""); */
         } catch (SQLException e) {
             e.printStackTrace();
         }
