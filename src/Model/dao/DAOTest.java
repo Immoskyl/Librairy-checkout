@@ -5,7 +5,7 @@ package Model.dao;
  */
 public class DAOTest {
 
-    public boolean createUserTest () {
+    public static boolean createUserTest () {
         DAO dao = DAO.getInstance();
         Person person = new Person();
         person.iD = 1;
@@ -16,7 +16,7 @@ public class DAOTest {
         return true;
     }
 
-    public boolean deleteUserTest () { //doesnt work
+    public static boolean deleteUserTest () { //doesnt work
         DAO dao = DAO.getInstance();
         Person person = new Person();
         person.iD = 1;
@@ -27,9 +27,9 @@ public class DAOTest {
         return true;
     }
 
-    public boolean createAndDeleteUserTest () { //doesnt work
-        if (this.createUserTest()) {
-            if (this.deleteUserTest()) {
+    public static boolean createAndDeleteUserTest () { //doesnt work
+        if (createUserTest()) {
+            if (deleteUserTest()) {
                 return true;
             }
         }
@@ -37,7 +37,6 @@ public class DAOTest {
     }
 
     public static void main(String[] args) {
-        DAOTest dao = new DAOTest();
-        dao.createAndDeleteUserTest();
+        DAOTest.createAndDeleteUserTest();
     }
 }
