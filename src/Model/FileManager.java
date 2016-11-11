@@ -11,7 +11,7 @@ public class FileManager {
 	
 	public ArrayList<History> readHistory(String fileName)
 	{
-//		ArrayList<> history = new ArrayList <>
+		ArrayList<History> history = new ArrayList <>();
 		try
 		{
 			FileReader fr = new FileReader(fileName);

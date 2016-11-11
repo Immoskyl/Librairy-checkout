@@ -1,6 +1,5 @@
 package Model.discount;
 
-import Model.dao.IDAO;
 import Model.dao.User;
 
 import static util.Maths.round;
@@ -8,7 +7,7 @@ import static util.Maths.round;
 /**
  * Created by immoskyl on 31/10/16.
  */
-public class UserDiscount implements IDAO {
+public class UserDiscount implements IDiscount {
 
     private User user;
     private int pointsModulo;

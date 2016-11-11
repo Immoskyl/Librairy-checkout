@@ -5,5 +5,5 @@ package Model.discount;
  */
 public interface IDiscount {
 
-    double CalculateDiscount ();
+    double calculateDiscount();
 }
