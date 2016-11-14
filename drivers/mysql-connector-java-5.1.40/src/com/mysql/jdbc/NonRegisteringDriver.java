@@ -498,7 +498,7 @@ public class NonRegisteringDriver implements java.sql.Driver {
     }
 
     /**
-     * The getPropertyInfo method is intended to allow a generic GUI tool to
+     * The getPropertyInfo method is intended to allow a generic gui tool to
      * discover what properties it should prompt a human for in order to get
      * enough information to connect to a database.
      * 

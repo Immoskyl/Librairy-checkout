@@ -1122,7 +1122,7 @@ Initial Database for Connection
    dbname.tablename.colname FROM dbname.tablename...) in your
    SQL. Opening a connection without specifying the database to
    use is generally only useful when building tools that work
-   with multiple databases, such as GUI database managers.
+   with multiple databases, such as gui database managers.
    Note
 
    Always use the Connection.setCatalog() method to specify the

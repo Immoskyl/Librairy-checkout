@@ -206,7 +206,7 @@ public class DataSourceTest extends BaseTestCase {
     /**
      * This method is separated from the rest of the example since you normally
      * would NOT register a JDBC driver in your code. It would likely be
-     * configered into your naming and directory service using some GUI.
+     * configered into your naming and directory service using some gui.
      * 
      * @throws Exception
      *             if an error occurs
