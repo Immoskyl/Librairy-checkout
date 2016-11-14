@@ -6,13 +6,6 @@ public class History {
 	private String game;
 	private String price;
 	
-//	History(String n, String g, Double c)
-//	{
-//		this.name = n;
-//		this.game = g;
-//		this.cost = c;
-//	}
-	
 	public History(String n, String g, String p)
 	{
 		this.name = n;

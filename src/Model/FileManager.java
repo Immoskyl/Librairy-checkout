@@ -23,8 +23,9 @@ public class FileManager {
 				fileLines = br.readLine();
 				parts = fileLines.split(",");
 				History aHistory = new History(parts[0], parts[1], parts[2]);
-				
+				history.add(aHistory);
 			}
+			br.close();
 		}
 		
 		catch(IOException e)
@@ -33,6 +34,30 @@ public class FileManager {
 		}
 		return history;
 	}
+	
+	public ArrayList<newUser> readStaff(String Filename)
+	{
+		ArrayList <newUser> staff = new ArrayList <newUser>();
+		try{
+	      FileReader fr = new FileReader(Filename);
+	      BufferedReader br = new BufferedReader(fr);
+	      String fileLines;
+	      String[] parts;
+	      while(br.ready())
+	      {
+	        fileLines = br.readLine();
+	        parts = fileLines.split(",");
+	        Employee aStaff = new Employee(parts[0], parts[1], parts[2], parts[3], parts[4]);
+	        staff.add(aStaff);
+	      }
+	      br.close();
+	      } 
+	      catch(IOException e)
+	     {
+	        System.out.println("Couldnt Read file Staff");
+	     }
+	     return staff;
+ 	}
 	
 	public ArrayList<newUser> readCustomer(String Filename, ArrayList<GamesList> games)
 	{
@@ -67,31 +92,7 @@ public class FileManager {
 	        System.out.println("Couldnt Read file Customer");
 	     }
 	     return customer;
- 	}
-	
-	public ArrayList<newUser> readStaff(String Filename)
-	{
-		ArrayList <newUser> staff = new ArrayList <newUser>();
-		try{
-	      FileReader fr = new FileReader(Filename);
-	      BufferedReader br = new BufferedReader(fr);
-	      String fileLines;
-	      String[] parts;
-	      while(br.ready())
-	      {
-	        fileLines = br.readLine();
-	        parts = fileLines.split(",");
-	        Employee aStaff = new Employee(parts[0], parts[1], parts[2], parts[3], parts[4]);
-	        staff.add(aStaff);
-	      }
-	      br.close();
-	      } 
-	      catch(IOException e)
-	     {
-	        System.out.println("Couldnt Read file Staff");
-	     }
-	     return staff;
- 	}
+ 	}	
 	
 	@SuppressWarnings("unused")
 	public ArrayList<newUser> readAdministrator(String Filename)
@@ -217,5 +218,24 @@ public class FileManager {
 	      System.out.println("Couldnt Write file Admin");
 	    }
 	  }
+ 	
+ 	public void writeHistory(String filename, ArrayList<History> history)
+ 	{
+ 		try
+ 		{
+ 			FileWriter fw = new FileWriter(filename);
+ 			BufferedWriter bw = new BufferedWriter(fw);
+ 			for (int i =0; i < history.size(); i++)
+ 			{
+ 				bw.write(history.get(i).getName() + "," + history.get(i).getGame() + "," + history.get(i).getPrice());
+ 				bw.newLine();
+ 			}
+ 			bw.close();
+ 		}
+ 		catch(IOException e)
+ 		{
+ 			System.out.println("Couldnt Write file History");
+ 		}
+ 	}
 }
 
