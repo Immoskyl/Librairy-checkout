@@ -7,5 +7,13 @@ import java.util.HashMap;
  */
 public class Order {
 
-    public HashMap<Product, Integer> getList() {return new HashMap<>();}
+HashMap<Product, Integer> list;
+
+    public HashMap<Product, Integer> getList() {
+        return list;
+    }
+
+    public void setList(HashMap<Product, Integer> list) {
+        this.list = list;
+    }
 }

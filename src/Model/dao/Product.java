@@ -41,4 +41,10 @@ public class Product {
     String description;
     double price;
 
+    public Product(int ID, String name, String description, double price) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }

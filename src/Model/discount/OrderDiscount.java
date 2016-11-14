@@ -1,6 +1,5 @@
 package Model.discount;
 
-import Model.dao.IDAO;
 import Model.dao.Order;
 import Model.dao.Product;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 /**
  * Created by immoskyl on 31/10/16.
  */
-public class OrderDiscount implements IDAO {
+public class OrderDiscount implements IDiscount {
 
     private Order order;
     private int itemModulo;

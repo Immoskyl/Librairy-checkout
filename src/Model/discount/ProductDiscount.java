@@ -1,6 +1,5 @@
 package Model.discount;
 
-import Model.dao.IDAO;
 import Model.dao.Product;
 
 import static util.Maths.calcPercentage;
@@ -8,12 +7,12 @@ import static util.Maths.calcPercentage;
 /**
  * Created by immoskyl on 31/10/16.
  */
-public class ProductDiscount implements IDAO{
+public class ProductDiscount implements IDiscount {
 
     private double percentageDiscount;
     private Product product;
 
-    public ProductDiscount(double percentageDiscount, Product product) {
+    public ProductDiscount(Product product, double percentageDiscount) {
         this.percentageDiscount = percentageDiscount;
         this.product = product;
     }
