@@ -19,4 +19,12 @@ public class Maths {
     public static double calcPercentage (double initialValue, double percentage) {
         return round (((initialValue * 100) - (initialValue * percentage)) / 100, 2); //safe way to divide && keeps only 2 digit after coma
     }
+
+    public int hashMD31(String strToHash) {
+        int hash = 7;
+        for (int i = 0; i < strToHash.length(); i++) {
+            hash = hash*31 + strToHash.charAt(i);
+        }
+        return hash;
+    }
 }

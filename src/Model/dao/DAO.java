@@ -18,6 +18,8 @@ import java.sql.PreparedStatement;
  */
 public class DAO implements IDAO{
 
+    // constants ------------------------------------
+
     private final String databaseHost = "mysql-immosite.alwaysdata.neto";
     private final String databaseName = "immosite_ul-librairy-checkout";
     private final String databaseUser = "immosite";
@@ -25,8 +27,9 @@ public class DAO implements IDAO{
 
     private final int dbPersonRowNumber = 6;
 
-
     private static DAO instance = null;
+
+    // setup ------------------------------------
 
     public static DAO getInstance() {
         if (instance == null) {
@@ -36,15 +39,6 @@ public class DAO implements IDAO{
     }
 
     private DAO(){}
-
-    private int hashMD31(String strToHash) {
-        int hash = 7;
-        for (int i = 0; i < strToHash.length(); i++) {
-            hash = hash*31 + strToHash.charAt(i);
-        }
-        return hash;
-    }
-
 
     private Connection setConnection () {
         Connection connection = null;
@@ -80,6 +74,9 @@ public class DAO implements IDAO{
 
     //--------------------------------------------------------------------------------------------------------------
 
+
+    // prepared query automation ------------------------------------
+
     private String selectionQueryBuilder (String table, List<String> rowList, List<String> rowCondition, List<String> argCondition) {
         String query = "SELECT ";
         for (int i = 0; i != rowList.size(); ++i) {
@@ -101,7 +98,6 @@ public class DAO implements IDAO{
         }
         return query;
     }
-
 
     private String intertionDelationQueryBuilder(String table, List<String> rowList, boolean isInsertionQuery) {
         String query = isInsertionQuery ?  "INSERT INTO " : "REMOVE FROM ";
@@ -199,6 +195,7 @@ public class DAO implements IDAO{
     //------------------------------------------------------------------------------------------------------------------
 
 
+    // object recovery ------------------------------------
 
     private newUser recoverUser (List<String> userlist) {
         if (userlist.size() == dbPersonRowNumber) {
@@ -217,6 +214,8 @@ public class DAO implements IDAO{
 
     //------------------------------------------------------------------------------------------------------------------
 
+
+    // public functions ------------------------------------
 
     // USER ------------------------------------
 
@@ -283,9 +282,30 @@ public class DAO implements IDAO{
     }
 
 
-    public void updateAllUsers () {
-        //todo
+    public void updateUsers (List<newUser> users) {     // verry basic and unsafe implementation
+        for (newUser user : users) {
+           deleteUser(user);
+           createUser(user);
+        }
     }
+
+
+    public String getUserType (int dbType) {
+        List<String> rowList = new ArrayList<>();
+        List<String> argList = new ArrayList<>();
+        List<String> argCondition = new ArrayList<>();
+        List<String> rowCondition = new ArrayList<>();
+
+
+        rowList.add("TYPE");
+        rowCondition.add("PERSONTYPEID");
+        argCondition.add(Integer.toString(dbType));
+
+        return selectionQuery("PERSONTYPE", rowList, argList, rowCondition, argCondition).get(0);
+    }
+
+
+    // PRODUCT ------------------------------------
 
     public void createProduct (Product product) { //todo
         //no verification if the tuple already exists
@@ -300,9 +320,5 @@ public class DAO implements IDAO{
         argList.add(product.description);
 
         insertionDelationQuery("PRODUCT", rowList, argList, true);
-    }
-
-    public String getUserType (int dbType) {
-
     }
 }
