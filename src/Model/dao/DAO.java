@@ -1,5 +1,8 @@
 package Model.dao;
 
+import Model.UserFactory;
+import Model.newUser;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,6 +22,8 @@ public class DAO implements IDAO{
     private final String databaseName = "immosite_ul-librairy-checkout";
     private final String databaseUser = "immosite";
     private final String databasePassword = "AEd021096=";
+
+    private final int dbPersonRowNumber = 6;
 
 
     private static DAO instance = null;
@@ -190,40 +195,60 @@ public class DAO implements IDAO{
     }
 
 
+
+    //------------------------------------------------------------------------------------------------------------------
+
+
+
+    private newUser recoverUser (List<String> userlist) {
+        if (userlist.size() == dbPersonRowNumber) {
+            return UserFactory.makeNewUser(getUserType(Integer.parseInt(userlist.get(5))), //type
+                    userlist.get(1),    //name
+                    userlist.get(4),    //address
+                    userlist.get(3),    //mail
+                    userlist.get(0),    //ID
+                    userlist.get(2));   //hashed password
+        }
+        else {
+            return null;
+        }
+    }
+
+
     //------------------------------------------------------------------------------------------------------------------
 
 
     // USER ------------------------------------
 
-    public void createUser (Person person) {
+    public void createUser (newUser person) {
         //no verification if the tuple already exists
         List<String> rowList = new ArrayList<>();
         List<String> argList = new ArrayList<>();
 
         rowList.add("NAME");
-        argList.add(person.name);
+        argList.add(person.getName());
         rowList.add("PASSWORD");
-        argList.add(person.pwd);
-        rowList.add("TYPE");
-        argList.add(person.type);
+        argList.add(person.getPassword());
+        //rowList.add("TYPE");
+        //argList.add(person.);
         rowList.add("ID");
-        argList.add(Integer.toString(person.iD));
+        argList.add(person.getUserId());
 
         insertionDelationQuery("PERSON", rowList, argList, true);
     }
 
-    public void deleteUser (Person person) { //todo
+    public void deleteUser (newUser person) {
         //no verification if the tuple already exists
         List<String> rowList = new ArrayList<>();
         List<String> argList = new ArrayList<>();
 
         rowList.add("ID");
-        argList.add(Integer.toString(person.iD));
+        argList.add(person.getUserId());
 
         insertionDelationQuery("PERSON", rowList, argList, false);
     }
 
-    public List<String> getAllUsers () { //todo
+    public List<newUser> getAllUsers () {
 
         List<String> rowList = new ArrayList<>();
         List<String> argList = new ArrayList<>();
@@ -232,10 +257,17 @@ public class DAO implements IDAO{
 
         rowList.add("*");
 
-        return selectionQuery("PERSON", rowList, argList, rowCondition, argCondition);
+        List<newUser> returnList = new ArrayList<>();
+        List<String> queryList = selectionQuery("PERSON", rowList, argList, rowCondition, argCondition);
+
+        for (int i  = 0; i != queryList.size(); i+=dbPersonRowNumber) { //parsing all users
+            returnList.add(recoverUser(queryList.subList(i, i+dbPersonRowNumber-1)));
+        }
+
+        return returnList;
     }
 
-    public List<String> getUser (int iD) { //todo
+    public newUser getUser (int iD) {
 
         List<String> rowList = new ArrayList<>();
         List<String> argList = new ArrayList<>();
@@ -246,7 +278,8 @@ public class DAO implements IDAO{
         rowCondition.add("ID");
         argCondition.add(Integer.toString(iD));
 
-        return selectionQuery("PERSON", rowList, argList, rowCondition, argCondition);
+       return recoverUser(selectionQuery("PERSON", rowList, argList, rowCondition, argCondition));
+
     }
 
 
@@ -267,5 +300,9 @@ public class DAO implements IDAO{
         argList.add(product.description);
 
         insertionDelationQuery("PRODUCT", rowList, argList, true);
+    }
+
+    public String getUserType (int dbType) {
+
     }
 }

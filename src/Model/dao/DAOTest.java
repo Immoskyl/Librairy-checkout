@@ -1,5 +1,8 @@
 package Model.dao;
 
+import Model.UserFactory;
+import Model.newUser;
+
 /**
  * Created by immoskyl on 05/11/16.
  */
@@ -36,7 +39,16 @@ public class DAOTest {
         return false;
     }
 
+    public static boolean selectUserTest () { //must run createUserTest() before
+        DAO dao = DAO.getInstance();
+        newUser user = UserFactory.makeNewUser("c", "jambon", "UL campus", "jambon@studentmail.ul.ie", 1, "thing");
+        dao.createUser(user);
+
+        return (dao.getUser(Integer.parseInt(user.getUserId())) == user)
+
+    }
+
     public static void main(String[] args) {
-        DAOTest.createAndDeleteUserTest();
+        //DAOTest.createAndDeleteUserTest();
     }
 }
