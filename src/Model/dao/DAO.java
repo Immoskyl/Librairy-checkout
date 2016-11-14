@@ -31,15 +31,31 @@ public class DAO implements IDAO{
 
     // setup ------------------------------------
 
+    /**
+     * getInstance
+     * Singleton pattern
+     * returns the only instance of the DAO
+     * @return DAO
+     */
     public static DAO getInstance() {
         if (instance == null) {
             instance = new DAO();
         }
         return instance;
-    }
+    } //getInstance()
 
+    /**
+     * DAO
+     * Singleton pattern
+     * private constructor
+     */
     private DAO(){}
 
+    /**
+     * setConnexion
+     * loads mysql driver (uncomment l.63 or oracle driver too) and sets connexion to the database registered in the constants
+     * @return Connexion database connexion
+     */
     private Connection setConnection () {
         Connection connection = null;
         try {
@@ -57,19 +73,20 @@ public class DAO implements IDAO{
                     ":3306/"+databaseName
                     + "",""+databaseUser+"",""+databasePassword+""); */
         } catch (SQLException e) {
-            e.printStackTrace();
+             e.printStackTrace();
         }
         return connection;
-    }
+    } //setConnexion()
 
     /**
-     * debug and test purposes
+     * listDrivers
+     * for debug and test purposes
      */
     public static void listDriver() {
         for (Enumeration<Driver> e = DriverManager.getDrivers(); e.hasMoreElements();) {
             System.out.println(e.nextElement());
         }
-    }
+    } //listDrivers()
 
 
     //--------------------------------------------------------------------------------------------------------------
@@ -77,6 +94,16 @@ public class DAO implements IDAO{
 
     // prepared query automation ------------------------------------
 
+    /**
+     * selectionQueryBuilder
+     * creates a monotable selection query in the form of:
+     * SELECT rowList FROM table WHERE rowCondition = argCondition
+     * @param table
+     * @param rowList
+     * @param rowCondition
+     * @param argCondition
+     * @return String query
+     */
     private String selectionQueryBuilder (String table, List<String> rowList, List<String> rowCondition, List<String> argCondition) {
         String query = "SELECT ";
         for (int i = 0; i != rowList.size(); ++i) {
@@ -97,8 +124,17 @@ public class DAO implements IDAO{
             }
         }
         return query;
-    }
+    } //selectionQueryBuiler()
 
+    /**
+     * intertionDelationQueryBuilder
+     * creates a inserting or deleting query in the form of:
+     * INSERT INTO table VALUES rowList
+     * @param table
+     * @param rowList
+     * @param isInsertionQuery
+     * @return String query
+     */
     private String intertionDelationQueryBuilder(String table, List<String> rowList, boolean isInsertionQuery) {
         String query = isInsertionQuery ?  "INSERT INTO " : "REMOVE FROM ";
         query += table;
@@ -112,8 +148,18 @@ public class DAO implements IDAO{
         }
         System.out.println(query);      //debug
         return query;
-    }
+    } //insertionDelationQuery()
 
+    /**
+     * selectionQuery
+     * creates a prepared query and executes it on the db registered in the constants
+     * @param table
+     * @param rowList
+     * @param argList
+     * @param rowCondition
+     * @param argCondition
+     * @return List<String> result of the query, each row in a different String
+     */
     private List<String> selectionQuery (String table, List<String> rowList, List<String> argList, List<String> rowCondition, List<String> argCondition) { //uses prepared queries
         PreparedStatement stmt = null;
         Connection connection = this.setConnection();
@@ -153,8 +199,17 @@ public class DAO implements IDAO{
             }
         }
         return list;
-    }
+    } //selectionQuery()
 
+    /**
+     * insertionDelationQuery
+     * creates a prepared query and executes it on the db registered in the constants
+     * @param table
+     * @param rowList
+     * @param argList
+     * @param isAnInsertionQuery
+     * it returns nothing because the writting query is assumed to success or to rightly be handled by the exceptions
+     */
     private void insertionDelationQuery(String table, List<String> rowList, List<String> argList, boolean isAnInsertionQuery) {
         PreparedStatement stmt = null;
         Connection connection = this.setConnection();
@@ -188,7 +243,7 @@ public class DAO implements IDAO{
                 e.printStackTrace();
             }
         }
-    }
+    } //intersionDelationQuery()
 
 
 
@@ -197,6 +252,12 @@ public class DAO implements IDAO{
 
     // object recovery ------------------------------------
 
+    /**
+     * recoverUser
+     * instanciate a newUser according to raw values selected from PERSON table from the db
+     * @param userlist
+     * @return newUser user of the right type
+     */
     private newUser recoverUser (List<String> userlist) {
         if (userlist.size() == dbPersonRowNumber) {
             return UserFactory.makeNewUser(getUserType(Integer.parseInt(userlist.get(5))), //type
@@ -209,7 +270,7 @@ public class DAO implements IDAO{
         else {
             return null;
         }
-    }
+    } //recoverUser()
 
 
     //------------------------------------------------------------------------------------------------------------------

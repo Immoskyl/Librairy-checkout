@@ -1,7 +1,8 @@
 package Model.dao;
 
 /**
- * Created by immoskyl on 06/11/16.
+ * Created by Romain Roux on 06/11/16.
+ * Dummy implementation because I don't have Darran's implementation...
  */
 public class Product {
     public int getID() {

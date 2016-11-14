@@ -3,7 +3,8 @@ package Model.dao;
 import java.util.HashMap;
 
 /**
- * Created by immoskyl on 08/11/16.
+ * Created by Romain Roux on 08/11/16.
+ * Dummy implementation because I don't have Darran's implementation...
  */
 public class Order {
 

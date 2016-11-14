@@ -1,14 +1,20 @@
 package Model.discount;
 
+import Model.Customer;
 import Model.dao.*;
 
 import java.util.HashMap;
 
 /**
- * Created by immoskyl on 11/11/16.
+ * Created by Romain Roux on 11/11/16.
  */
 public class DiscountTest {
 
+    /**
+     * orderDiscountTest
+     * creates an Order packaging some Products, applies a discount, anb checks for valid discount computation
+     * @return boolean success
+     */
     public static boolean orderDiscountTest () {
         HashMap<Product, Integer> list = new HashMap<>();
         list.put(new Product(1,"book thing", "random product", 1.32), 4); //discount 1.32
@@ -20,28 +26,39 @@ public class DiscountTest {
 
         OrderDiscount orderDiscount = DiscountFactory.createOrderDiscount(order, 4);
         return orderDiscount.calculateDiscount() == 5.32; //1.32 + 4.0 = 5.32
-    }
+    } //orderDiscountTest()
 
-
+    /**
+     * productDiscountTest
+     * creates a Product object, applies a discount, and checks for valid discount computation
+     * @return
+     */
     public static boolean productDiscountTest () {
        Product p = new Product(4,"board game thing", "raise it to the next level", 40.21);
         ProductDiscount productDiscount = new ProductDiscount(p, 21.1);
 
         return productDiscount.calculateDiscount() == 31.73; //40.21 - 8.48 = 31.73
-    }
+    } //productDiscountTest()
 
-    public static boolean userDIscountTest () {
-        User user = new User();
+    /**
+     * userDIscountTest
+     * creates a Customer, sets its discount points, applies a discount, and checks for valid discount computation
+     * @return boolean success
+     */
+    public static boolean userDiscountTest() {
+        Customer user = new Customer();
         user.setPoints(1000);
         UserDiscount userDiscount = new UserDiscount(user, 429);
 
         return (userDiscount.calculateDiscount() == 858 // 1000 / 429 = 2; 429*2 = 858
             && user.getPoints() == 142); // 1000 - 858 = 142
-    }
+    } //userDiscountTest()
 
+    /*test
     public static void main(String[] args) {
         System.out.println("orderDiscount is fine: " + DiscountTest.orderDiscountTest());
         System.out.println("productDiscount is fine: " + DiscountTest.productDiscountTest());
-        System.out.println("userDiscount is fine: " + DiscountTest.userDIscountTest());
+        System.out.println("userDiscount is fine: " + DiscountTest.userDiscountTest());
     }
+     */
 }

@@ -5,7 +5,7 @@ import Model.dao.Product;
 import static util.Maths.calcPercentage;
 
 /**
- * Created by immoskyl on 31/10/16.
+ * Created by Romain Roux on 31/10/16.
  */
 public class ProductDiscount implements IDiscount {
 

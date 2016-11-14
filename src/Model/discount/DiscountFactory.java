@@ -1,23 +1,43 @@
 package Model.discount;
 
+import Model.Customer;
 import Model.dao.Order;
 import Model.dao.Product;
-import Model.dao.User;
 
 /**
- * Created by immoskyl on 11/11/16.
+ * Created by Romain Roux on 11/11/16.
  */
 public class DiscountFactory {
-
-   public static OrderDiscount createOrderDiscount (Order o, int modulo) {
+    /**
+     * createOrderDiscount
+     * instanciates an OrderDiscount object
+     * @param o
+     * @param modulo
+     * @return OrderDiscount
+     */
+    public static OrderDiscount createOrderDiscount (Order o, int modulo) {
        return new OrderDiscount(o, modulo);
    }
 
-   public static ProductDiscount createProductDiscount (Product p, double percentage) {
+    /**
+     * createProductDiscount
+     * instanciates a ProductDIscount object
+     * @param p
+     * @param percentage
+     * @return UserDiscount
+     */
+    public static ProductDiscount createProductDiscount (Product p, double percentage) {
        return new ProductDiscount(p, percentage);
-   }
+    }
 
-   public static UserDiscount createUserDiscount (User u, int level) {
+    /**
+     * createUserDiscount
+     * instanciates a ProductDiscount object
+     * @param u
+     * @param level
+     * @return ProductDiscount
+     */
+    public static UserDiscount createUserDiscount (Customer u, int level) {
        return new UserDiscount(u, level);
-   }
+    }
 }

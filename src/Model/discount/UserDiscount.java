@@ -1,18 +1,19 @@
 package Model.discount;
 
-import Model.dao.User;
+import Model.Customer;
 
 import static util.Maths.round;
 
 /**
- * Created by immoskyl on 31/10/16.
+ * Created by Romain Roux on 31/10/16.
+ *
  */
 public class UserDiscount implements IDiscount {
 
-    private User user;
+    private Customer user;
     private int pointsModulo;
 
-    public UserDiscount(User user, int level) {
+    public UserDiscount(Customer user, int level) {
         this.user = user;
         this.pointsModulo = level;
     }

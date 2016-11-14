@@ -6,7 +6,8 @@ import Model.dao.Product;
 import java.util.Map;
 
 /**
- * Created by immoskyl on 31/10/16.
+ * Created by Romain Roux on 31/10/16.
+ * dummy class because I dont have Darran's implementation...
  */
 public class OrderDiscount implements IDiscount {
 
