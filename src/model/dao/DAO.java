@@ -23,8 +23,8 @@ public class DAO implements IDAO{
 
     private final String databaseHost = "mysql-immosite.alwaysdata.neto";
     private final String databaseName = "immosite_ul-librairy-checkout";
-    private final String databaseUser = "immosite";
-    private final String databasePassword = "AEd021096=";
+    private final String databaseUser = "foo";
+    private final String databasePassword = "bar";
 
     private final int dbPersonRowNumber = 6;
 
